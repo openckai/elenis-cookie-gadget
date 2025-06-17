@@ -110,6 +110,11 @@ export const permissions: GadgetPermissions = {
             run: true,
           },
         },
+        uploadFile: {
+          actions: {
+            create: true,
+          },
+        },
       },
       actions: {
         scheduledShopifySync: true,
@@ -117,6 +122,13 @@ export const permissions: GadgetPermissions = {
     },
     unauthenticated: {
       storageKey: "unauthenticated",
+      models: {
+        uploadFile: {
+          actions: {
+            create: true,
+          },
+        },
+      },
     },
   },
 };

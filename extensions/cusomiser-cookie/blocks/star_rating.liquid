@@ -2,6 +2,25 @@
 <span style="color:{{ block.settings.colour }}">
   {% render 'stars', rating: avg_rating %}
 </span>
+<div  > This says you have run again. </div>
+<div
+  id="gadget-app-container"
+  data-assets='{
+    "circle": "{{ 'cookie-circle.png' | asset_url }}",
+    "circleProt": "{{ 'cookie-circle-prot.png' | asset_url }}",
+    "square": "{{ 'cookie-square.png' | asset_url }}",
+    "squareProt": "{{ 'cookie-square-prot.png' | asset_url }}",
+    "rect": "{{ 'cookie-rect.png' | asset_url }}",
+    "rectProt": "{{ 'cookie-rect-prot.png' | asset_url }}",
+    "pattern": "{{ 'elenis-pattern.png' | asset_url }}",
+    "coverProt": "{{ 'cover-prot.jpg' | asset_url }}"
+  }'
+></div>
+
+{{ 'main.js' | asset_url | script_tag }}
+<div  > This says you have run again.</div>
+
+{{ 'main.js' | asset_url | script_tag }}
 {% if avg_rating >= 4 %}
   <br>
   <img src="{{ "thumbs-up.png" | asset_img_url: '15x' }}" height="15" width="15" loading="lazy">
