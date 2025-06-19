@@ -1,0 +1,820 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Koulen:wght@400&family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Import Google Fonts */
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-image: url("/elenis-pattern.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: white; /* Fallback color if image fails to load */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+}
+
+/* Alternative approach for better pattern coverage */
+@media (max-width: 767px) {
+  html,
+  body {
+    background-size: 150% auto;
+    background-position: center top;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  html,
+  body {
+    background-size: 120% auto;
+    background-position: center center;
+  }
+}
+
+@media (min-width: 1200px) {
+  html,
+  body {
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+.font-koulen {
+  font-family: 'Koulen', cursive !important;
+  font-weight: 400 !important;
+}
+
+/* Typography Classes - Reusable Font Styles */
+
+/* Picture Perfect Heading Font */
+.font-picture-perfect {
+  font-family: 'Koulen', cursive !important;
+  font-weight: 400px !important;
+  font-size: 52px;
+  line-height: 48px;
+  letter-spacing: 0%;
+}
+
+
+/* Body Text Font */
+.font-body-text {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+
+/* Additional Inter font variations for reuse */
+.font-inter-regular {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+.font-inter-medium {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+
+.font-inter-semibold {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+}
+
+.font-inter-bold {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+}
+
+/* Responsive adjustments for Picture Perfect heading */
+@media (max-width: 768px) {
+  .font-picture-perfect {
+    font-size: 36px;
+    line-height: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .font-picture-perfect {
+    /* font-size: 28px; */
+    /* line-height: 26px; */
+  }
+}
+
+  .offers-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.offers-content {
+  background-color: #f8f9fa;
+  padding: 32px 0;
+}
+
+.offers-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.offers-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 32px;
+  color: #1f2937;
+}
+
+.offers-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 48px;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .offers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.offer-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+.offer-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #d81b60;
+}
+
+.offer-description {
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.offer-button {
+  background-color: #d81b60;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.offer-button:hover {
+  background-color: #c2185b;
+}
+
+  .picture-perfect-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+  }
+  
+  @media (min-width: 768px) {
+    .picture-perfect-section {
+        gap:20px;
+    }
+  }
+  
+  .container {
+    max-width: 1440px;
+    padding: 20px 20px;
+  }
+
+  @media (max-width: 767px) {
+    .container {
+        padding: 0px 0px;
+      }
+  }
+  
+  /* Desktop Layout */
+  .desktop-layout {
+    display: none;
+  }
+  
+  @media (min-width: 1024px) {
+    .desktop-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 47px;
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .desktop-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: center;
+      }
+  }
+  
+  .product-image-wrapper {
+    aspect-ratio: 1;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #f3f4f6;
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .content-section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .heading-section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .content-section {
+        gap: 20px;
+    }
+    .heading-section {
+        gap: 20px;
+    }
+    
+  }
+  
+  .main-heading {
+    color: #111827;
+  }
+  
+  .heading-highlight {
+    color: #ec4899;
+  }
+  
+  .price-section {
+    margin-bottom: 32px;
+  }
+  
+  .price {
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 32px;
+  }
+  
+  .description-text {
+    color: #374151;
+    line-height: 1.6;
+  }
+  
+  .features-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  
+  .feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+  }
+  
+  .feature-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #f9a8d4;
+  }
+  
+  .feature-text {
+    color: #ec4899;
+    text-align: center;
+  }
+  
+  /* Mobile Layout */
+  .mobile-layout {
+    display: block;
+  }
+  
+  @media (min-width: 768px) {
+    .mobile-layout {
+      display: none;
+    }
+  }
+  
+  .mobile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .mobile-image-container {
+    position: relative;
+  }
+  
+  .mobile-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    overflow: hidden;
+    background-color: #f3f4f6;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .mobile-image-wrapper video,
+  .mobile-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .mobile-content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 0px 16px 40px 16px;
+  }
+  
+  .mobile-heading-section {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .mobile-features-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mobile-description {
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  /* Responsive adjustments for mobile */
+  @media (max-width: 768px) {
+    .picture-perfect-section {
+      padding: 0px 0;
+    }
+
+    .main-heading {
+        display: flex;
+        flex-direction: column;
+        color: white;
+      }
+  
+    .mobile-content {
+      gap: 32px;
+    }
+  
+    .price {
+      font-size: 28px;
+    }
+  
+    .product-image-wrapper {
+      aspect-ratio: 1;
+      border-radius: 8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+  
+    .mobile-image-wrapper {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  
+    .price {
+      font-size: 24px;
+    }
+  
+    .content-section {
+      gap: 24px;
+    }
+  
+    .mobile-content {
+      gap: 28px;
+    }
+
+    .product-image-wrapper {
+      aspect-ratio: 1;
+      border-radius: 4px;
+    }
+  }
+  
+</style>
+<section class="picture-perfect-section">
+  <div class="container">
+    <!-- Desktop Layout -->
+    <div class="desktop-layout">
+      <!-- Product Image -->
+      <div class="product-image-container">
+        <div class="product-image-wrapper">
+          {% if section.settings.media_type == 'video' %}
+            {% if section.settings.video != blank %}
+              <video controls autoplay loop muted>
+                <source src="{{ section.settings.video | file_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            {% elsif section.settings.video_url != blank %}
+              {{ section.settings.video_url | video_tag: controls: true, autoplay: true, loop: true, muted: true }}
+            {% endif %}
+          {% else %}
+            {% if section.settings.image %}
+              <img 
+                src="{{ section.settings.image | img_url: '1500x' }}"
+                srcset="
+                  {{ section.settings.image | img_url: '400x' }} 400w,
+                  {{ section.settings.image | img_url: '600x' }} 600w,
+                  {{ section.settings.image | img_url: '800x' }} 800w,
+                  {{ section.settings.image | img_url: '1000x' }} 1000w,
+                  {{ section.settings.image | img_url: '1500x' }} 1500w
+                "
+                sizes="
+                  (max-width: 480px) 400px,
+                  (max-width: 768px) 600px,
+                  (max-width: 1024px) 800px,
+                  (max-width: 1440px) 1000px,
+                  1500px
+                "
+                alt="Product Image"
+                class="product-image"
+                loading="lazy"
+                width="{{ section.settings.image.width }}"
+                height="{{ section.settings.image.height }}"
+              >
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="content-section">
+        <div class="heading-section">
+          <h2 class="font-picture-perfect main-heading">
+            {{ section.settings.heading_line1 }}
+            <span class="heading-highlight">{{ section.settings.heading_line2 }}</span>
+          </h2>
+          <p class="font-body-text description-text">
+            {{ section.settings.description }}
+          </p>
+        </div>
+
+        <!-- Features -->
+        <div class="features-container">
+          <div class="feature-item">
+            <div style="display: flex; align-items: center; justify-content: center;">
+              {% if section.settings.feature1_icon %}
+                <img 
+                  src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                  alt="{{ section.settings.feature1_text }}"
+                  width="30"
+                  height="30"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="feature-dot"></div>
+              {% endif %}
+            </div>
+            <span class="font-body-text feature-text">{{ section.settings.feature1_text }}</span>
+          </div>
+
+          <div class="feature-item">
+            <div style="display: flex; align-items: center; justify-content: center;">
+              {% if section.settings.feature2_icon %}
+                <img 
+                  src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                  alt="{{ section.settings.feature2_text }}"
+                  width="30"
+                  height="30"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="feature-dot"></div>
+              {% endif %}
+            </div>
+            <span class="font-body-text feature-text">{{ section.settings.feature2_text }}</span>
+          </div>
+
+          <div class="feature-item">
+            <div style="display: flex; align-items: center; justify-content: center;">
+              {% if section.settings.feature3_icon %}
+                <img 
+                  src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                  alt="{{ section.settings.feature3_text }}"
+                  width="30"
+                  height="30"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="feature-dot"></div>
+              {% endif %}
+            </div>
+            <span class="font-body-text feature-text">{{ section.settings.feature3_text }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div class="mobile-layout">
+      <div class="mobile-content">
+        <!-- Product Image -->
+        <div class="mobile-image-container">
+          <div class="mobile-image-wrapper">
+            {% if section.settings.media_type == 'video' %}
+              {% if section.settings.video != blank %}
+                <video controls autoplay loop muted>
+                  <source src="{{ section.settings.video | file_url }}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              {% elsif section.settings.video_url != blank %}
+                {{ section.settings.video_url | video_tag: controls: true, autoplay: true, loop: true, muted: true }}
+              {% endif %}
+            {% else %}
+              {% if section.settings.image %}
+                <img 
+                  src="{{ section.settings.image | img_url: '1500x' }}"
+                  srcset="
+                    {{ section.settings.image | img_url: '400x' }} 400w,
+                    {{ section.settings.image | img_url: '600x' }} 600w,
+                    {{ section.settings.image | img_url: '800x' }} 800w,
+                    {{ section.settings.image | img_url: '1000x' }} 1000w,
+                    {{ section.settings.image | img_url: '1500x' }} 1500w
+                  "
+                  sizes="
+                    (max-width: 480px) 400px,
+                    (max-width: 768px) 600px,
+                    (max-width: 1024px) 800px,
+                    (max-width: 1440px) 1000px,
+                    1500px
+                  "
+                  alt="Product Image"
+                  class="product-image"
+                  loading="lazy"
+                  width="{{ section.settings.image.width }}"
+                  height="{{ section.settings.image.height }}"
+                >
+              {% endif %}
+            {% endif %}
+          </div>
+          <div class="mobile-heading-section">
+            <h2 class="font-picture-perfect main-heading">
+              {{ section.settings.heading_line1 }}
+              <span class="heading-highlight">{{ section.settings.heading_line2 }}</span>
+            </h2>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="mobile-content-section">
+          <!-- Features -->
+          <div class="mobile-features-container">
+            <div class="feature-item">
+              <div style="display: flex; align-items: center; justify-content: center;">
+                {% if section.settings.feature1_icon %}
+                  <img 
+                    src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                    alt="{{ section.settings.feature1_text }}"
+                    width="30"
+                    height="30"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <div class="feature-dot"></div>
+                {% endif %}
+              </div>
+              <span class="font-body-text feature-text">{{ section.settings.feature1_text }}</span>
+            </div>
+
+            <div class="feature-item">
+              <div style="display: flex; align-items: center; justify-content: center;">
+                {% if section.settings.feature2_icon %}
+                  <img 
+                    src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                    alt="{{ section.settings.feature2_text }}"
+                    width="30"
+                    height="30"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <div class="feature-dot"></div>
+                {% endif %}
+              </div>
+              <span class="font-body-text feature-text">{{ section.settings.feature2_text }}</span>
+            </div>
+
+            <div class="feature-item">
+              <div style="display: flex; align-items: center; justify-content: center;">
+                {% if section.settings.feature3_icon %}
+                  <img 
+                    src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                    alt="{{ section.settings.feature3_text }}"
+                    width="30"
+                    height="30"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <div class="feature-dot"></div>
+                {% endif %}
+              </div>
+              <span class="font-body-text feature-text">{{ section.settings.feature3_text }}</span>
+            </div>
+          </div>
+          <p class="font-body-text description-text mobile-description">
+            {{ section.settings.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Picture Perfect Section",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media Settings"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Media Type",
+      "options": [
+        {
+          "value": "video",
+          "label": "Video"
+        },
+        {
+          "value": "image",
+          "label": "Image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Upload video file"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "or Video URL (YouTube/Vimeo)",
+      "accept": ["youtube", "vimeo"]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Upload an image to display when video is not selected"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading Line 1",
+      "default": "PICTURE PERFECT MOMENTS,"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading Line 2",
+      "default": "DELICIOUSLY CUSTOMIZED."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Upload your favorite photo and transform them into delicious, conversation-worthy treats that look as amazing as they taste. Our custom photo cookies bring your celebrations to life one sweet bite at a time."
+    },
+    {
+      "type": "header",
+      "content": "Feature 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature1_icon",
+      "label": "Feature 1 Icon",
+      "info": "Upload a small icon (30x30px recommended)"
+    },
+    {
+      "type": "text",
+      "id": "feature1_text",
+      "label": "Feature 1 Text",
+      "default": "Freshly baked"
+    },
+    {
+      "type": "header",
+      "content": "Feature 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature2_icon",
+      "label": "Feature 2 Icon",
+      "info": "Upload a small icon (30x30px recommended)"
+    },
+    {
+      "type": "text",
+      "id": "feature2_text",
+      "label": "Feature 2 Text",
+      "default": "Nut free recipe"
+    },
+    {
+      "type": "header",
+      "content": "Feature 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature3_icon",
+      "label": "Feature 3 Icon",
+      "info": "Upload a small icon (30x30px recommended)"
+    },
+    {
+      "type": "text",
+      "id": "feature3_text",
+      "label": "Feature 3 Text",
+      "default": "Made with love"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Picture Perfect Section",
+      "settings": {
+        "feature1_text": "Freshly baked",
+        "feature2_text": "Nut free recipe",
+        "feature3_text": "Made with love"
+      }
+    }
+  ]
+}
+{% endschema %}
