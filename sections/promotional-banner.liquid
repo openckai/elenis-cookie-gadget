@@ -1,0 +1,365 @@
+{% style %}
+  .promotional-banner {
+    background-color: {{ section.settings.background_color }};
+    border-top: 3px solid {{ section.settings.border_color }};
+    border-bottom: 3px solid {{ section.settings.border_color }};
+    padding: 20px 0;
+    height: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+
+  .banner-scroll-container {
+    display: flex;
+    align-items: center;
+    animation: scroll-left 80s linear infinite;
+    gap: 60px;
+    height: 100%;
+    min-width: 200%;
+  }
+
+  .banner-item {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-shrink: 0;
+    height: 100%;
+  }
+
+  .banner-text {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: {{ section.settings.text_color }};
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .banner-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .banner-separator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: {{ section.settings.separator_color }};
+    flex-shrink: 0;
+    display: flex;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .promotional-banner:hover .banner-scroll-container {
+    animation-play-state: paused;
+  }
+
+  @media (max-width: 768px) {
+    .promotional-banner {
+      height: 100px;
+      padding: 16px 0;
+    }
+
+    .banner-text {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+
+    .banner-icon {
+      width: 30px;
+      height: 30px;
+    }
+
+    .banner-separator {
+      width: 6px;
+      height: 6px;
+    }
+
+    .banner-item {
+      gap: 35px;
+    }
+
+    .banner-scroll-container {
+      gap: 50px;
+      animation: scroll-left 60s linear infinite;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .promotional-banner {
+      height: 80px;
+      padding: 12px 0;
+    }
+
+    .banner-text {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .banner-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .banner-separator {
+      width: 4px;
+      height: 4px;
+    }
+
+    .banner-item {
+      gap: 30px;
+    }
+
+    .banner-scroll-container {
+      gap: 40px;
+      animation: scroll-left 50s linear infinite;
+    }
+  }
+{% endstyle %}
+
+{%- comment -%}First set of items{%- endcomment -%}
+<section class="promotional-banner">
+  <div class="banner-scroll-container">
+    {%- for i in (1..5) -%}
+      {%- assign text_key = 'promo_text_' | append: i -%}
+      {%- assign icon_key = 'promo_icon_' | append: i -%}
+      {%- if section.settings[text_key] != blank -%}
+        <div class="banner-item">
+          {%- if section.settings[icon_key] != blank -%}
+            <div class="banner-icon">
+              <img src="{{ section.settings[icon_key] | img_url: '80x' }}" 
+                   alt="{{ section.settings[text_key] | escape }}"
+                   width="40"
+                   height="40"
+                   loading="lazy">
+            </div>
+          {%- endif -%}
+          <span class="banner-text">{{ section.settings[text_key] }}</span>
+          <div class="banner-separator"></div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- comment -%}Duplicate items for continuous scroll{%- endcomment -%}
+    {%- for i in (1..5) -%}
+      {%- assign text_key = 'promo_text_' | append: i -%}
+      {%- assign icon_key = 'promo_icon_' | append: i -%}
+      {%- if section.settings[text_key] != blank -%}
+        <div class="banner-item">
+          {%- if section.settings[icon_key] != blank -%}
+            <div class="banner-icon">
+              <img src="{{ section.settings[icon_key] | img_url: '80x' }}" 
+                   alt="{{ section.settings[text_key] | escape }}"
+                   width="40"
+                   height="40"
+                   loading="lazy">
+            </div>
+          {%- endif -%}
+          <span class="banner-text">{{ section.settings[text_key] }}</span>
+          <div class="banner-separator"></div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promotional Banner",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#fdf5e7"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Separator Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_1",
+      "label": "Promotional Text 1",
+      "default": "PICTURE PERFECT MOMENTS"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_icon_1",
+      "label": "Icon 1",
+      "info": "40 x 40px recommended"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_2",
+      "label": "Promotional Text 2",
+      "default": "DELICIOUSLY CUSTOMIZED"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_icon_2",
+      "label": "Icon 2",
+      "info": "40 x 40px recommended"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_3",
+      "label": "Promotional Text 3",
+      "default": "FREE LOCAL DELIVERY"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_icon_3",
+      "label": "Icon 3",
+      "info": "40 x 40px recommended"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_4",
+      "label": "Promotional Text 4",
+      "default": "MADE WITH LOVE"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_icon_4",
+      "label": "Icon 4",
+      "info": "40 x 40px recommended"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_5",
+      "label": "Promotional Text 5",
+      "default": "CUSTOM PHOTO COOKIES"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_icon_5",
+      "label": "Icon 5",
+      "info": "40 x 40px recommended"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promotional_item",
+      "name": "Promotional Item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Promotional Text",
+          "default": "Add your promotional text here"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon Image",
+          "info": "40 x 40px recommended"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promotional Banner",
+      "settings": {
+        "background_color": "#FDF5E7",
+        "border_color": "#000000",
+        "text_color": "#000000",
+        "separator_color": "#000000",
+        "promo_text_1": "PICTURE PERFECT MOMENTS",
+        "promo_text_2": "DELICIOUSLY CUSTOMIZED",
+        "promo_text_3": "FREE LOCAL DELIVERY",
+        "promo_text_4": "MADE WITH LOVE",
+        "promo_text_5": "CUSTOM PHOTO COOKIES"
+      },
+      "blocks": [
+        {
+          "type": "promotional_item",
+          "settings": {
+            "text": "PICTURE PERFECT MOMENTS"
+          }
+        },
+        {
+          "type": "promotional_item",
+          "settings": {
+            "text": "DELICIOUSLY CUSTOMIZED"
+          }
+        },
+        {
+          "type": "promotional_item",
+          "settings": {
+            "text": "FREE LOCAL DELIVERY"
+          }
+        },
+        {
+          "type": "promotional_item",
+          "settings": {
+            "text": "MADE WITH LOVE"
+          }
+        },
+        {
+          "type": "promotional_item",
+          "settings": {
+            "text": "CUSTOM PHOTO COOKIES"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 
