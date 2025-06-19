@@ -1,0 +1,185 @@
+{% style %}
+  .media-feature-strip {
+    background-color: white;
+    height: 80px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+
+  .media-feature-strip-container {
+    background-color: {{ section.settings.background_color }};
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    animation: scroll-left {{ section.settings.scroll_speed }}s linear infinite;
+    height: 100%;
+    min-width: 200%;
+    gap: 60px;
+  }
+
+  .media-feature-strip-item {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-shrink: 0;
+    height: 100%;
+  }
+
+  .media-feature-strip-logo-icon {
+    width: auto;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .media-feature-strip-logo-image {
+    width: auto;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  {% if section.settings.pause_on_hover %}
+    .media-feature-strip:hover .media-feature-strip-container {
+      animation-play-state: paused;
+    }
+  {% endif %}
+
+  @media (max-width: 768px) {
+    .media-feature-strip-container {
+      animation: scroll-left {{ section.settings.mobile_scroll_speed }}s linear infinite;
+      gap: 20px;
+    }
+  }
+{% endstyle %}
+
+<section class="media-feature-strip">
+  <div class="media-feature-strip-container">
+    {%- assign logo_blocks = section.blocks | where: "type", "logo" -%}
+    {%- for block in logo_blocks -%}
+      {%- if block.settings.logo != blank -%}
+        <div class="media-feature-strip-item" {{ block.shopify_attributes }}>
+          <div class="media-feature-strip-logo-icon">
+            <img
+              src="{{ block.settings.logo | img_url: 'master' }}"
+              alt="{{ block.settings.logo.alt | escape }}"
+              loading="lazy"
+              class="media-feature-strip-logo-image"
+              width="auto"
+              height="40"
+            >
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- comment -%}Duplicate logos for infinite scroll{%- endcomment -%}
+    {%- for block in logo_blocks -%}
+      {%- if block.settings.logo != blank -%}
+        <div class="media-feature-strip-item">
+          <div class="media-feature-strip-logo-icon">
+            <img
+              src="{{ block.settings.logo | img_url: 'master' }}"
+              alt="{{ block.settings.logo.alt | escape }}"
+              loading="lazy"
+              class="media-feature-strip-logo-image"
+              width="auto"
+              height="40"
+            >
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Media Feature Strip",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFC0D4"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll Speed",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_scroll_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Mobile Scroll Speed",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on Hover",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo Image",
+          "info": "Recommended height: 40px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Media Feature Strip",
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Highlight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen:wght@400&display=swap" rel="stylesheet">
+    <style>
+        .font-koulen {
+            font-family: 'Koulen', cursive;
+            font-weight: 400;
+        }
+
+        .feature-highlight {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding-top: 60px;
+            padding-bottom: 120px;
+        }
+
+        .feature-highlight-container {
+            width: 100%;
+            max-width: 1440px;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .feature-highlight-content {
+            display: flex;
+            flex-direction: column;
+            width: min-content;
+        }
+
+        .feature-highlight-text-block {
+            text-align: left;
+        }
+
+        .title-wrapper {
+            display: inline-block;
+            width: auto;
+        }
+
+        .feature-highlight-title-group {
+            font-size: 64px;
+            line-height: 1.1;
+            color: black;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .feature-highlight-title-span {
+            color: #D53E6C;
+        }
+
+        .feature-highlight-description {
+            font-size: 16px;
+            margin-top: 12px;
+            text-align: left;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .feature-highlight-image {
+            width: 50%;
+        }
+
+        .feature-highlight-image-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 40px;
+            border: 2px solid #D53E6C;
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .feature-highlight-title-group {
+                font-size: 52px;
+            }
+            .feature-highlight-container {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .feature-highlight {
+                padding-top: 40px;
+                padding-bottom: 60px;
+            }
+
+            .feature-highlight-title-group {
+                font-size: 40px;
+            }
+            
+            .feature-highlight-container {
+                padding: 0 20px;
+                flex-direction: column;
+            }
+
+            .feature-highlight-image {
+                width: 100%;
+                order: 3;
+            }
+
+            .feature-highlight-content {
+                width: 100%;
+                order: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feature-highlight-title-group {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="feature-highlight">
+        <div class="feature-highlight-container">
+            <div class="feature-highlight-content">
+                <h2 class="font-koulen feature-highlight-title-group">
+                    TALK ABOUT QUALITY.
+                    <br>
+                    <span class="feature-highlight-title-span">
+                        AND AGAIN HERE.
+                    </span>
+                </h2>
+                <p class="feature-highlight-description">
+                    Lorem ipsum dolor sit amet consectetur. Sed tristique neque mauris
+                    tincidunt non diam tellus. Pellentesque lectus risus massa ac felis
+                    duis. Varius eleifend sit ullamcorper est est gravida. Posuere sed
+                    hac nunc quis varius in id at. Id.
+                </p>
+            </div>
+
+            <div class="feature-highlight-image">
+                <img
+                    src="/assets/feature-hight-light.png"
+                    alt="feature-highlight-image"
+                    width="500"
+                    height="500"
+                    class="feature-highlight-image-img"
+                    loading="lazy"
+                />
+            </div>
+        </div>
+
+        <div class="feature-highlight-container">
+            <div class="feature-highlight-image">
+                <img
+                    src="/assets/feature-hight-light.png"
+                    alt="feature-highlight-image"
+                    width="500"
+                    height="500"
+                    class="feature-highlight-image-img"
+                    loading="lazy"
+                />
+            </div>
+            
+            <div class="feature-highlight-content">
+                <h2 class="font-koulen feature-highlight-title-group">
+                    TALK ABOUT QUALITY.
+                    <br>
+                    <span class="feature-highlight-title-span">
+                        AND AGAIN HERE.
+                    </span>
+                </h2>
+                <p class="feature-highlight-description">
+                    Lorem ipsum dolor sit amet consectetur. Sed tristique neque mauris
+                    tincidunt non diam tellus. Pellentesque lectus risus massa ac felis
+                    duis. Varius eleifend sit ullamcorper est est gravida. Posuere sed
+                    hac nunc quis varius in id at. Id.
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

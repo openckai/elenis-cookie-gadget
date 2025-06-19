@@ -1,0 +1,290 @@
+{% style %}
+  .feature-highlight {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    background-color: {{ section.settings.background_color }};
+    padding-top: 60px;
+    padding-bottom: 120px;
+  }
+
+  .feature-highlight-container {
+    width: 100%;
+    max-width: 1440px;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .feature-highlight-content {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+  }
+
+  .feature-highlight-text-block {
+    text-align: left;
+  }
+
+  .title-wrapper {
+    display: inline-block;
+    width: auto;
+  }
+
+  .feature-highlight-title-group {
+    font-size: 64px;
+    line-height: 1.1;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+    white-space: nowrap;
+    font-family: 'Koulen', cursive;
+    font-weight: 400;
+  }
+
+  .feature-highlight-title-span {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .feature-highlight-description {
+    font-size: 16px;
+    margin-top: 12px;
+    text-align: left;
+    line-height: 1.5;
+    color: {{ section.settings.text_color }};
+    max-width: 500px;
+  }
+
+  .feature-highlight-image {
+    width: 50%;
+  }
+
+  .feature-highlight-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 40px;
+    border: 2px solid {{ section.settings.accent_color }};
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    .feature-highlight-title-group {
+      font-size: 52px;
+    }
+    .feature-highlight-container {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .feature-highlight {
+      padding-top: 40px;
+      padding-bottom: 60px;
+    }
+
+    .feature-highlight-title-group {
+      font-size: 40px;
+    }
+    
+    .feature-highlight-container {
+      padding: 0 20px;
+      flex-direction: column;
+    }
+
+    .feature-highlight-image {
+      width: 100%;
+      order: 3;
+    }
+
+    .feature-highlight-content {
+      width: 100%;
+      order: 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .feature-highlight-title-group {
+      font-size: 36px;
+    }
+  }
+{% endstyle %}
+
+<section class="feature-highlight">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'feature' -%}
+        <div class="feature-highlight-container" {{ block.shopify_attributes }}>
+          {%- if block.settings.image_position == 'right' -%}
+            <div class="feature-highlight-content">
+              <h2 class="feature-highlight-title-group">
+                {{ block.settings.title | escape }}
+                <br>
+                <span class="feature-highlight-title-span">
+                  {{ block.settings.subtitle | escape }}
+                </span>
+              </h2>
+              <div class="feature-highlight-description">
+                {{ block.settings.description }}
+              </div>
+            </div>
+
+            <div class="feature-highlight-image">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | img_url: '1000x' }}"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  width="500"
+                  height="500"
+                  class="feature-highlight-image-img"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'feature-highlight-image-img placeholder-svg' }}
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <div class="feature-highlight-image">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | img_url: '1000x' }}"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  width="500"
+                  height="500"
+                  class="feature-highlight-image-img"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'feature-highlight-image-img placeholder-svg' }}
+              {%- endif -%}
+            </div>
+
+            <div class="feature-highlight-content">
+              <h2 class="feature-highlight-title-group">
+                {{ block.settings.title | escape }}
+                <br>
+                <span class="feature-highlight-title-span">
+                  {{ block.settings.subtitle | escape }}
+                </span>
+              </h2>
+              <div class="feature-highlight-description">
+                {{ block.settings.description }}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Feature Highlight",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#D53E6C"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "TALK ABOUT QUALITY"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "AND AGAIN HERE"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Lorem ipsum dolor sit amet consectetur. Sed tristique neque mauris tincidunt non diam tellus. Pellentesque lectus risus massa ac felis duis.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image Position",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Highlight",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "TALK ABOUT QUALITY",
+            "subtitle": "AND AGAIN HERE",
+            "image_position": "right"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "TALK ABOUT QUALITY",
+            "subtitle": "AND AGAIN HERE",
+            "image_position": "left"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

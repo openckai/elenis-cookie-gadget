@@ -1,0 +1,408 @@
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+{% style %}
+  .memory-grid {
+    background-color: {{ section.settings.background_color }};
+    padding-top: 80px;
+  }
+
+  .memory-grid-container {
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .memory-grid-header {
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    line-height: 1;
+    gap: 40px;
+  }
+
+  .memory-grid-header-text {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: end;
+  }
+
+  .memory-grid-title {
+    line-height: 0.7;
+    font-size: 64px;
+    margin: 0;
+    color: {{ section.settings.title_color }};
+    font-family: 'Koulen', cursive;
+    font-weight: 400;
+  }
+
+  .memory-grid-description {
+    color: {{ section.settings.accent_color }};
+    font-size: 20px;
+    margin: 0;
+    font-family: 'Koulen', cursive;
+    font-weight: 400;
+  }
+
+  .memory-grid-arrows {
+    display: flex;
+    gap: 40px;
+  }
+
+  .arrow-btn {
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: {{ section.settings.arrow_color }};
+  }
+
+  .arrow-btn:hover {
+    background: {{ section.settings.accent_color }};
+    color: white;
+  }
+
+  .arrow-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .memory-card-scroll-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .memory-card-row {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+  }
+
+  .memory-card {
+    flex: 0 0 auto;
+    width: 280px;
+    height: 420px;
+    {% if section.settings.card_background_image != blank %}
+      background: url({{ section.settings.card_background_image | img_url: 'master' }}) center/cover no-repeat;
+    {% else %}
+      background: {{ section.settings.accent_color }};
+    {% endif %}
+    border-radius: 16px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .memory-card-overlay {
+    padding: 20px;
+    color: {{ section.settings.card_text_color }};
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .memory-card-title {
+    font-size: 36px;
+    line-height: 36px;
+    margin: 0;
+    font-family: 'Koulen', cursive;
+    font-weight: 400;
+  }
+
+  .memory-card-overlay p {
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin: 0;
+  }
+
+  .memory-card-overlay span {
+    font-size: 20px;
+    font-family: 'Koulen', cursive;
+    font-weight: 400;
+  }
+
+  @media (max-width: 768px) {
+    .memory-grid-container {
+      padding: 0 20px;
+    }
+
+    .memory-grid-header-text {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .memory-grid-title {
+      font-size: 48px;
+    }
+
+    .memory-grid-description {
+      font-size: 16px;
+    }
+
+    .memory-grid-header {
+      gap: 20px;
+    }
+
+    .memory-grid-arrows {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .memory-grid-title {
+      font-size: 36px;
+    }
+
+    .memory-card {
+      width: 250px;
+      height: 380px;
+    }
+
+    .memory-card-title {
+      font-size: 28px;
+      line-height: 28px;
+    }
+
+    .memory-card-overlay p {
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .memory-card-overlay span {
+      font-size: 18px;
+    }
+  }
+{% endstyle %}
+
+<section class="memory-grid">
+  <div class="memory-grid-container">
+    <div class="memory-grid-header">
+      <div class="memory-grid-header-text">
+        <h2 class="memory-grid-title">{{ section.settings.title | escape }}</h2>
+        <p class="memory-grid-description">{{ section.settings.subtitle | escape }}</p>
+      </div>
+      <div class="memory-grid-arrows">
+        <button class="arrow-btn card-js-scroll-left" aria-label="Scroll left" disabled>
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="arrow-btn card-js-scroll-right" aria-label="Scroll right">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="memory-card-scroll-wrapper">
+      <div class="memory-card-row">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'testimonial' -%}
+            <div class="memory-card" {{ block.shopify_attributes }}>
+              <div class="memory-card-overlay">
+                <h3 class="memory-card-title">{{ block.settings.title | escape }}</h3>
+                <p>{{ block.settings.text }}</p>
+                <span>{{ block.settings.author | escape }}</span>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.memory-card-scroll-wrapper');
+    const carousel = document.querySelector('.memory-card-row');
+    const scrollLeft = document.querySelector('.card-js-scroll-left');
+    const scrollRight = document.querySelector('.card-js-scroll-right');
+    const cards = carousel.querySelectorAll('.memory-card');
+    
+    if (!cards.length) return;
+
+    let currentPosition = 0;
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 20; // Gap between cards
+    const moveAmount = cardWidth + gap;
+    
+    function updateButtons() {
+      // Enable/disable left button
+      scrollLeft.disabled = currentPosition >= 0;
+      
+      // Calculate max scroll
+      const containerWidth = container.offsetWidth;
+      const totalWidth = carousel.scrollWidth;
+      const maxScroll = totalWidth - containerWidth;
+      
+      // Enable/disable right button
+      scrollRight.disabled = Math.abs(currentPosition) >= maxScroll;
+    }
+
+    function moveCarousel(direction) {
+      const containerWidth = container.offsetWidth;
+      const totalWidth = carousel.scrollWidth;
+      const maxScroll = totalWidth - containerWidth;
+
+      if (direction === 'left') {
+        currentPosition = Math.min(0, currentPosition + moveAmount);
+      } else {
+        currentPosition = Math.max(-maxScroll, currentPosition - moveAmount);
+      }
+
+      carousel.style.transform = `translateX(${currentPosition}px)`;
+      updateButtons();
+    }
+
+    // Initialize button states
+    updateButtons();
+
+    // Add click handlers
+    scrollLeft.addEventListener('click', () => moveCarousel('left'));
+    scrollRight.addEventListener('click', () => moveCarousel('right'));
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      // Reset position if needed
+      const containerWidth = container.offsetWidth;
+      const totalWidth = carousel.scrollWidth;
+      const maxScroll = totalWidth - containerWidth;
+      
+      if (Math.abs(currentPosition) > maxScroll) {
+        currentPosition = -maxScroll;
+        carousel.style.transform = `translateX(${currentPosition}px)`;
+      }
+      
+      updateButtons();
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Memory Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "MEMORIES MADE"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "1,000+ 5 STAR REVIEWS"
+    },
+    {
+      "type": "header",
+      "content": "Style Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#D53E6C"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_background_image",
+      "label": "Card Background Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "SO GOOD!"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Testimonial Text",
+          "default": "Lorem ipsum dolor sit amet consectetur. Sed tristique neque mauris tincidunt non diam tellus. Pellentesque lectus risus massa ac felis duis."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "SALLY, NY"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Memory Grid",
+      "settings": {
+        "title": "MEMORIES MADE",
+        "subtitle": "1,000+ 5 STAR REVIEWS"
+      },
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "title": "AMAZING!",
+            "text": "These cookies exceeded all my expectations! The quality and taste were absolutely incredible. Will definitely order again!",
+            "author": "MIKE, CA"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "title": "PERFECT!",
+            "text": "The custom photo cookies were exactly what I wanted for my daughter's birthday. Everyone loved them!",
+            "author": "JENNIFER, TX"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

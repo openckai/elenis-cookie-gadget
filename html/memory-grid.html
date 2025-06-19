@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Grid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .font-koulen {
+            font-family: 'Koulen', cursive;
+            font-weight: 400;
+        }
+
+        .memory-grid {
+            background-color: white;
+            padding-top: 80px;
+        }
+
+        .memory-grid-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Header */
+        .memory-grid-header {
+            display: flex;
+            justify-content: start;
+            align-items: end;
+            line-height: 1;
+            gap: 40px;
+        }
+
+        .memory-grid-header-text {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: end;
+        }
+
+        .memory-grid-title {
+            line-height: 0.7;
+            font-size: 64px;
+            margin: 0;
+            color: #000;
+        }
+
+        .memory-grid-description {
+            color: #D53E6C;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        /* Arrows */
+        .memory-grid-arrows {
+            display: flex;
+            gap: 40px;
+        }
+
+        .arrow-btn {
+            border: none;
+            background: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            color: #333;
+        }
+
+        .arrow-btn:hover {
+            background: #e7286b;
+            color: white;
+        }
+
+        /* Scroll Row */
+        .memory-card-scroll-wrapper {
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #D53E6C transparent;
+        }
+
+        .memory-card-scroll-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .memory-card-scroll-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .memory-card-scroll-wrapper::-webkit-scrollbar-thumb {
+            background-color: #D53E6C;
+            border-radius: 4px;
+        }
+
+        .memory-card-row {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+        }
+
+        .memory-grid-divider {
+            border: 2px dashed #D53E6C;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        /* Card */
+        .memory-card {
+            flex: 0 0 auto;
+            width: 280px;
+            height: 420px;
+            background: url("/assets/card-bg.png") center/cover no-repeat;
+            border-radius: 16px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .memory-card-overlay {
+            padding: 20px;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .memory-card-title {
+            font-size: 36px;
+            line-height: 36px;
+            margin: 0;
+        }
+
+        .memory-card-overlay p {
+            font-size: 16px;
+            line-height: 20px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            margin: 0;
+        }
+
+        .memory-card-overlay span {
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .memory-grid-container {
+                padding: 0 20px;
+            }
+
+            .memory-grid-header-text {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .memory-grid-title {
+                font-size: 48px;
+            }
+
+            .memory-grid-description {
+                font-size: 16px;
+            }
+
+            .memory-grid-header {
+                gap: 20px;
+            }
+
+            .memory-grid-arrows {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .memory-grid-title {
+                font-size: 36px;
+            }
+
+            .memory-card {
+                width: 250px;
+                height: 380px;
+            }
+
+            .memory-card-title {
+                font-size: 28px;
+                line-height: 28px;
+            }
+
+            .memory-card-overlay p {
+                font-size: 14px;
+                line-height: 18px;
+            }
+
+            .memory-card-overlay span {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="memory-grid">
+        <div class="memory-grid-container">
+            <!-- Header Block -->
+            <div class="memory-grid-header">
+                <div class="memory-grid-header-text">
+                    <h2 class="font-koulen memory-grid-title">MEMORIES MADE</h2>
+                    <p class="font-koulen memory-grid-description">1,000+ 5 STAR REVIEWS</p>
+                </div>
+                <div class="memory-grid-arrows">
+                    <button class="arrow-btn" onclick="scrollCards('left')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="arrow-btn" onclick="scrollCards('right')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card Row -->
+            <div class="memory-card-scroll-wrapper" id="cardScrollWrapper">
+                <div class="memory-card-row" id="cardRow">
+                    <!-- Memory cards will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sample testimonial data
+        const testimonials = [
+            {
+                title: "SO GOOD!",
+                text: "Lorem ipsum dolor sit amet consectetur. Sed tristique neque mauris tincidunt non diam tellus. Pellentesque lectus risus massa ac felis duis.",
+                author: "SALLY, NY"
+            },
+            {
+                title: "AMAZING!",
+                text: "These cookies exceeded all my expectations! The quality and taste were absolutely incredible. Will definitely order again!",
+                author: "MIKE, CA"
+            },
+            {
+                title: "PERFECT!",
+                text: "The custom photo cookies were exactly what I wanted for my daughter's birthday. Everyone loved them and they tasted fantastic!",
+                author: "JENNIFER, TX"
+            },
+            {
+                title: "LOVE IT!",
+                text: "Outstanding service and delicious cookies. The attention to detail in the photo printing was remarkable. Highly recommended!",
+                author: "DAVID, FL"
+            },
+            {
+                title: "FANTASTIC!",
+                text: "Best cookies I've ever had! The custom design was perfect and they arrived fresh and beautifully packaged.",
+                author: "LISA, WA"
+            },
+            {
+                title: "WONDERFUL!",
+                text: "These cookies made our anniversary celebration extra special. The quality and taste were beyond our expectations!",
+                author: "ROBERT, IL"
+            },
+            {
+                title: "EXCELLENT!",
+                text: "Professional service, beautiful presentation, and absolutely delicious cookies. Worth every penny!",
+                author: "MARIA, AZ"
+            },
+            {
+                title: "INCREDIBLE!",
+                text: "The photo quality on the cookies was amazing and they tasted even better than they looked. Will order again!",
+                author: "JOHN, OR"
+            },
+            {
+                title: "SUPERB!",
+                text: "Fast delivery, great customer service, and the most delicious custom cookies. Couldn't be happier!",
+                author: "SARAH, NV"
+            },
+            {
+                title: "OUTSTANDING!",
+                text: "These cookies were the hit of our party! Everyone was amazed by the quality and taste. Thank you!",
+                author: "CHRIS, CO"
+            }
+        ];
+
+        // Function to create memory cards
+        function createMemoryCards() {
+            const cardRow = document.getElementById('cardRow');
+            
+            testimonials.forEach((testimonial, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'memory-card-overlay';
+                
+                const title = document.createElement('h3');
+                title.className = 'font-koulen memory-card-title';
+                title.textContent = testimonial.title;
+                
+                const text = document.createElement('p');
+                text.textContent = testimonial.text;
+                
+                const author = document.createElement('span');
+                author.className = 'font-koulen';
+                author.textContent = testimonial.author;
+                
+                overlay.appendChild(title);
+                overlay.appendChild(text);
+                overlay.appendChild(author);
+                card.appendChild(overlay);
+                cardRow.appendChild(card);
+            });
+        }
+
+        // Function to scroll cards
+        function scrollCards(direction) {
+            const scrollWrapper = document.getElementById('cardScrollWrapper');
+            const scrollAmount = 300; // Adjust scroll distance as needed
+            
+            if (direction === 'left') {
+                scrollWrapper.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else if (direction === 'right') {
+                scrollWrapper.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Initialize memory cards when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            createMemoryCards();
+        });
+    </script>
+</body>
+</html>
