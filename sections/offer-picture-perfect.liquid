@@ -347,31 +347,42 @@ a {
   
   .features-container {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 24px;
     margin-top: 16px;
+    width: 100%;
   }
   
   .feature-item {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    gap: 12px;
+    gap: 24px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    height: 100%;
   }
   
   .feature-dot {
-    width: 16px;
-    height: 16px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: #f9a8d4;
   }
   
   .feature-text {
     color: #ec4899;
-    text-align: center;
+    white-space: nowrap;
+    font-size: 40px;
+    line-height: 1;
   }
-  
+
+  .feature-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+
   .mobile-content {
     display: flex;
     flex-direction: column;
@@ -422,6 +433,7 @@ a {
     position: relative;
     overflow: hidden;
     padding: 8px 0;
+    height: 120px;
   }
 
   .mobile-features-wrapper {
@@ -429,8 +441,8 @@ a {
     align-items: center;
     gap: 16px;
     animation: scrollFeatures 15s linear infinite;
-    /* Double the content to ensure seamless loop */
     width: max-content;
+    height: 100%;
   }
 
   @keyframes scrollFeatures {
@@ -442,21 +454,6 @@ a {
     }
   }
 
-  .feature-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding-right: 0;
-  }
-
-  .feature-text {
-    color: #ec4899;
-    white-space: nowrap;
-  }
-  
   .mobile-description {
     max-width: 480px;
     margin: 0 auto;
@@ -617,10 +614,10 @@ a {
             <div style="display: flex; align-items: center; justify-content: center;">
               {% if section.settings.feature1_icon %}
                 <img 
-                  src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                  src="{{ section.settings.feature1_icon | img_url: '160x' }}" 
                   alt="{{ section.settings.feature1_text }}"
-                  width="30"
-                  height="30"
+                  width="80"
+                  height="80"
                   loading="lazy"
                 >
               {% else %}
@@ -634,10 +631,10 @@ a {
             <div style="display: flex; align-items: center; justify-content: center;">
               {% if section.settings.feature2_icon %}
                 <img 
-                  src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                  src="{{ section.settings.feature2_icon | img_url: '160x' }}" 
                   alt="{{ section.settings.feature2_text }}"
-                  width="30"
-                  height="30"
+                  width="80"
+                  height="80"
                   loading="lazy"
                 >
               {% else %}
@@ -651,10 +648,10 @@ a {
             <div style="display: flex; align-items: center; justify-content: center;">
               {% if section.settings.feature3_icon %}
                 <img 
-                  src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                  src="{{ section.settings.feature3_icon | img_url: '160x' }}" 
                   alt="{{ section.settings.feature3_text }}"
-                  width="30"
-                  height="30"
+                  width="80"
+                  height="80"
                   loading="lazy"
                 >
               {% else %}
@@ -749,10 +746,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature1_icon %}
                     <img 
-                      src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature1_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature1_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -766,10 +763,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature2_icon %}
                     <img 
-                      src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature2_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature2_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -783,10 +780,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature3_icon %}
                     <img 
-                      src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature3_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature3_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -801,10 +798,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature1_icon %}
                     <img 
-                      src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature1_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature1_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -818,10 +815,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature2_icon %}
                     <img 
-                      src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature2_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature2_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -835,10 +832,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature3_icon %}
                     <img 
-                      src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature3_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature3_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -853,10 +850,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature1_icon %}
                     <img 
-                      src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature1_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature1_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -870,10 +867,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature2_icon %}
                     <img 
-                      src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature2_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature2_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -887,10 +884,10 @@ a {
                 <div style="display: flex; align-items: center; justify-content: center;">
                   {% if section.settings.feature3_icon %}
                     <img 
-                      src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                      src="{{ section.settings.feature3_icon | img_url: '160x' }}" 
                       alt="{{ section.settings.feature3_text }}"
-                      width="30"
-                      height="30"
+                      width="80"
+                      height="80"
                       loading="lazy"
                     >
                   {% else %}
@@ -985,7 +982,7 @@ a {
       "type": "image_picker",
       "id": "feature1_icon",
       "label": "Feature 1 Icon",
-      "info": "Upload a small icon (30x30px recommended)"
+      "info": "Upload a square icon (80x80px recommended) - Will be displayed at this size"
     },
     {
       "type": "text",
@@ -1001,7 +998,7 @@ a {
       "type": "image_picker",
       "id": "feature2_icon",
       "label": "Feature 2 Icon",
-      "info": "Upload a small icon (30x30px recommended)"
+      "info": "Upload a square icon (80x80px recommended) - Will be displayed at this size"
     },
     {
       "type": "text",
@@ -1017,7 +1014,7 @@ a {
       "type": "image_picker",
       "id": "feature3_icon",
       "label": "Feature 3 Icon",
-      "info": "Upload a small icon (30x30px recommended)"
+      "info": "Upload a square icon (80x80px recommended) - Will be displayed at this size"
     },
     {
       "type": "text",
