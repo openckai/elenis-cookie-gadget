@@ -417,10 +417,44 @@ a {
   
   .mobile-features-container {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 8px 0;
+  }
+
+  .mobile-features-wrapper {
+    display: flex;
+    align-items: center;
     gap: 16px;
+    animation: scrollFeatures 15s linear infinite;
+    /* Double the content to ensure seamless loop */
+    width: max-content;
+  }
+
+  @keyframes scrollFeatures {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .feature-item {
+    display: flex;
     align-items: center;
     justify-content: center;
+    gap: 12px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding-right: 0;
+  }
+
+  .feature-text {
+    color: #ec4899;
+    white-space: nowrap;
   }
   
   .mobile-description {
@@ -709,55 +743,162 @@ a {
         <div class="mobile-content-section">
           <!-- Features -->
           <div class="mobile-features-container">
-            <div class="feature-item">
-              <div style="display: flex; align-items: center; justify-content: center;">
-                {% if section.settings.feature1_icon %}
-                  <img 
-                    src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
-                    alt="{{ section.settings.feature1_text }}"
-                    width="30"
-                    height="30"
-                    loading="lazy"
-                  >
-                {% else %}
-                  <div class="feature-dot"></div>
-                {% endif %}
+            <div class="mobile-features-wrapper">
+              <!-- First set of items -->
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature1_icon %}
+                    <img 
+                      src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature1_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature1_text }}</span>
               </div>
-              <span class="font-body-text feature-text">{{ section.settings.feature1_text }}</span>
-            </div>
 
-            <div class="feature-item">
-              <div style="display: flex; align-items: center; justify-content: center;">
-                {% if section.settings.feature2_icon %}
-                  <img 
-                    src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
-                    alt="{{ section.settings.feature2_text }}"
-                    width="30"
-                    height="30"
-                    loading="lazy"
-                  >
-                {% else %}
-                  <div class="feature-dot"></div>
-                {% endif %}
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature2_icon %}
+                    <img 
+                      src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature2_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature2_text }}</span>
               </div>
-              <span class="font-body-text feature-text">{{ section.settings.feature2_text }}</span>
-            </div>
 
-            <div class="feature-item">
-              <div style="display: flex; align-items: center; justify-content: center;">
-                {% if section.settings.feature3_icon %}
-                  <img 
-                    src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
-                    alt="{{ section.settings.feature3_text }}"
-                    width="30"
-                    height="30"
-                    loading="lazy"
-                  >
-                {% else %}
-                  <div class="feature-dot"></div>
-                {% endif %}
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature3_icon %}
+                    <img 
+                      src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature3_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature3_text }}</span>
               </div>
-              <span class="font-body-text feature-text">{{ section.settings.feature3_text }}</span>
+
+              <!-- Second set of items (exact duplicate) -->
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature1_icon %}
+                    <img 
+                      src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature1_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature1_text }}</span>
+              </div>
+
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature2_icon %}
+                    <img 
+                      src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature2_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature2_text }}</span>
+              </div>
+
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature3_icon %}
+                    <img 
+                      src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature3_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature3_text }}</span>
+              </div>
+
+              <!-- Third set for extra smoothness -->
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature1_icon %}
+                    <img 
+                      src="{{ section.settings.feature1_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature1_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature1_text }}</span>
+              </div>
+
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature2_icon %}
+                    <img 
+                      src="{{ section.settings.feature2_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature2_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature2_text }}</span>
+              </div>
+
+              <div class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  {% if section.settings.feature3_icon %}
+                    <img 
+                      src="{{ section.settings.feature3_icon | img_url: '60x' }}" 
+                      alt="{{ section.settings.feature3_text }}"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="feature-dot"></div>
+                  {% endif %}
+                </div>
+                <span class="font-body-text feature-text">{{ section.settings.feature3_text }}</span>
+              </div>
             </div>
           </div>
           <p class="font-body-text description-text mobile-description">
