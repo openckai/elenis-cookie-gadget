@@ -376,8 +376,7 @@ a {
     position: relative;
   }
   
-  .mobile-image-wrapper video,
-  .mobile-image-wrapper img {
+  .mobile-image-wrapper video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -470,6 +469,7 @@ a {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    background: #f3f4f6;
   }
 
   .video-player {
@@ -477,6 +477,12 @@ a {
     height: 100%;
     object-fit: cover;
     pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .video-container {
+      aspect-ratio: 1/1;
+    }
   }
 </style>
 <section class="picture-perfect-section">
@@ -618,7 +624,7 @@ a {
           <div class="mobile-image-wrapper">
             {% if section.settings.media_type == 'video' %}
               {% if section.settings.video != blank %}
-                <div class="video-container" style="width: 100%; height: 100%; position: relative;">
+                <div class="video-container">
                   <video 
                     id="mobile-video-{{ section.id }}"
                     autoplay 
@@ -628,18 +634,22 @@ a {
                     preload="metadata"
                     defaultmuted 
                     class="video-player"
-                    style="width: 100%; height: 100%; object-fit: cover;"
                   >
                     <source src="{{ section.settings.video.sources[1].url }}" type="video/mp4">
                   </video>
                 </div>
                 <script>
-                  document.getElementById('mobile-video-{{ section.id }}').play().catch(function(error) {
-                    console.log("Mobile video play failed", error);
+                  document.addEventListener('DOMContentLoaded', function() {
+                    var video = document.getElementById('mobile-video-{{ section.id }}');
+                    if(video) {
+                      video.play().catch(function(error) {
+                        console.log("Mobile video play failed", error);
+                      });
+                    }
                   });
                 </script>
               {% elsif section.settings.video_url != blank %}
-                <div class="video-container" style="width: 100%; height: 100%; position: relative;">
+                <div class="video-container">
                   {{ section.settings.video_url | video_tag: class: 'video-player', autoplay: true, loop: true, muted: true, controls: false, playsinline: true }}
                 </div>
               {% endif %}
