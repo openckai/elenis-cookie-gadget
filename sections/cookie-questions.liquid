@@ -1,0 +1,353 @@
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' | stylesheet_tag }}
+
+{% style %}
+  .elenis-cookie-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+    background-color: {{ section.settings.background_color }};
+    padding-top: 60px;
+    padding-bottom: 120px;
+  }
+
+  .elenis-cookie-questions-container {
+    width: 100%;
+    max-width: 1440px;
+    padding: 0 40px;
+    display: flex;
+    justify-content: start;
+    gap: 40px;
+  }
+
+  .elenis-cookie-questions-content {
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+  }
+
+  .elenis-cookie-questions-text-block {
+    text-align: left;
+  }
+
+  .elenis-title-wrapper {
+    display: inline-block;
+    width: auto;
+  }
+
+  .elenis-cookie-questions-title-group {
+    font-size: 64px;
+    line-height: 1.1;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+    white-space: nowrap;
+    font-family: 'Koulen', cursive;
+  }
+
+  .elenis-cookie-questions-title-span {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .elenis-cookie-questions-description {
+    font-size: 16px;
+    margin-top: 12px;
+    text-align: left;
+  }
+
+  .elenis-cookie-questions-image {
+    width: 50%;
+    aspect-ratio: 1/1;
+  }
+
+  .elenis-cookie-questions-image-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    height: auto;
+    object-fit: contain;
+    border-radius: 40px;
+    border: 2px solid {{ section.settings.accent_color }};
+  }
+
+  .elenis-cookie-questions-list {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .elenis-cookie-questions-item {
+    border-top: 2px solid {{ section.settings.title_color }};
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .elenis-cookie-questions-item:last-child {
+    border-bottom: 2px solid {{ section.settings.title_color }};
+  }
+
+  .elenis-cookie-questions-item-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    cursor: pointer;
+    color: {{ section.settings.title_color }};
+  }
+
+  .elenis-cookie-questions-item-title-icon {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .elenis-cookie-questions-item-answer {
+    font-weight: 400;
+    font-size: 16px;
+    display: none;
+    color: {{ section.settings.text_color }};
+  }
+
+  .elenis-cookie-questions-item-answer.show {
+    display: block;
+  }
+
+  @media (max-width: 1240px) {
+    .elenis-cookie-questions-content {
+      padding-top: 10px;
+    }
+    .elenis-cookie-questions-item {
+      padding: 15px 10px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .elenis-cookie-questions {
+      padding-top: 0;
+      gap: 0;
+    }
+    .elenis-cookie-questions-image {
+      display: none;
+    }
+    .elenis-cookie-questions-content {
+      width: 100%;
+      padding: 15px 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .elenis-cookie-questions {
+      padding-bottom: 60px;
+      gap: 10px;
+    }
+    .elenis-cookie-questions-title-group {
+      font-size: 40px;
+    }
+    .elenis-cookie-questions-container {
+      padding: 0 20px;
+      flex-direction: column;
+    }
+    .elenis-cookie-questions-content {
+      width: 100%;
+      order: 1;
+      padding: 15px 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .elenis-cookie-questions-title-group {
+      font-size: 36px;
+    }
+  }
+{% endstyle %}
+
+<section class="elenis-cookie-questions">
+  <div class="elenis-cookie-questions-container">
+    {%- unless request.design_mode -%}
+      {%- if section.settings.main_image != blank -%}
+        <div class="elenis-cookie-questions-image hide-on-mobile">
+          <img
+            src="{{ section.settings.main_image | img_url: 'master' }}"
+            alt="{{ section.settings.main_image.alt | escape }}"
+            class="elenis-cookie-questions-image-img"
+            width="{{ section.settings.main_image.width }}"
+            height="{{ section.settings.main_image.height }}"
+            loading="lazy"
+          >
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="elenis-cookie-questions-image hide-on-mobile">
+        {%- if section.settings.main_image != blank -%}
+          <img
+            src="{{ section.settings.main_image | img_url: 'master' }}"
+            alt="{{ section.settings.main_image.alt | escape }}"
+            class="elenis-cookie-questions-image-img"
+            width="{{ section.settings.main_image.width }}"
+            height="{{ section.settings.main_image.height }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+    {%- endunless -%}
+    <div class="elenis-cookie-questions-content">
+      <h2 class="elenis-cookie-questions-title-group">
+        {{ section.settings.title | escape }}
+        <br>
+        <span class="elenis-cookie-questions-title-span">
+          {{ section.settings.subtitle | escape }}
+        </span>
+      </h2>
+      <div class="elenis-cookie-questions-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'question' -%}
+            <div class="elenis-cookie-questions-item" {{ block.shopify_attributes }}>
+              <div class="elenis-cookie-questions-item-title" onclick="handleQuestionClick({{ forloop.index0 }})">
+                <h3>{{ block.settings.question | escape }}</h3>
+                <span class="elenis-cookie-questions-item-title-icon" id="elenis-icon-{{ forloop.index0 }}">+</span>
+              </div>
+              <p class="elenis-cookie-questions-item-answer" id="elenis-answer-{{ forloop.index0 }}">
+                {{ block.settings.answer }}
+              </p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let openIndex = null;
+
+  function handleQuestionClick(index) {
+    openIndex = openIndex === index ? null : index;
+    updateQuestionDisplay();
+  }
+
+  function updateQuestionDisplay() {
+    const questions = document.querySelectorAll('.elenis-cookie-questions-item');
+    questions.forEach((_, index) => {
+      const answer = document.getElementById(`elenis-answer-${index}`);
+      const icon = document.getElementById(`elenis-icon-${index}`);
+      
+      if (openIndex === index) {
+        answer.classList.add('show');
+        icon.textContent = '−';
+      } else {
+        answer.classList.remove('show');
+        icon.textContent = '+';
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Cookie Questions",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Cookie Questions?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "We have answers."
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Image"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#D53E6C"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What ingredients do you use in your cookies?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "We use only the finest ingredients including organic flour, real butter, farm-fresh eggs, and premium chocolate chips. All our cookies are made with natural ingredients and no artificial preservatives."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cookie Questions",
+      "settings": {
+        "title": "Cookie Questions?",
+        "subtitle": "We have answers."
+      },
+      "blocks": [
+        {
+          "type": "question"
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer gluten-free options?",
+            "answer": "Yes! We have a variety of gluten-free cookies made with almond flour and other gluten-free alternatives. They're just as delicious as our traditional cookies."
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How long do the cookies stay fresh?",
+            "answer": "Our cookies stay fresh for up to 7 days when stored in an airtight container at room temperature. For longer storage, you can freeze them for up to 3 months."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

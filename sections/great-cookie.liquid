@@ -1,0 +1,226 @@
+{% comment %}
+  Great Cookies Grid Section
+  Reusable CMS section name: Cookie Grid
+{% endcomment %}
+
+<section class="cookie-great-cookies" id="cookie-grid-{{ section.id }}">
+  <div class="cookie-great-cookies-container">
+    {% if section.settings.title != blank %}
+      <h2 class="font-koulen cookie-great-cookies-title">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+    
+    {% if section.settings.subtitle != blank %}
+      <p class="cookie-great-cookies-subtitle">
+        {{ section.settings.subtitle }}
+      </p>
+    {% endif %}
+
+    <div class="cookie-great-cookies-list">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'cookie_image' %}
+            {% if block.settings.cookie_link != blank %}
+              <a href="{{ block.settings.cookie_link }}" {{ block.shopify_attributes }}>
+            {% endif %}
+            
+            {% if block.settings.cookie_image != blank %}
+              <img
+                src="{{ block.settings.cookie_image | img_url: 'master' }}"
+                alt="{{ block.settings.alt_text | default: 'Cookie image' }}"
+                class="cookie-great-cookies-img"
+                loading="lazy"
+                width="400"
+                height="400"
+                {{ block.shopify_attributes }}
+              />
+            {% endif %}
+            
+            {% if block.settings.cookie_link != blank %}
+              </a>
+            {% endif %}
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cookie-great-cookies {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  .cookie-great-cookies-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .font-koulen {
+    font-family: 'Koulen', cursive;
+  }
+
+  .cookie-great-cookies-title {
+    text-align: center;
+    font-size: 36px;
+    color: #D53E6C;
+    margin: 0;
+  }
+
+  .cookie-great-cookies-subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cookie-great-cookies-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+
+  .cookie-great-cookies-img {
+    width: 100%;
+    height: auto !important;
+  }
+
+  @media (max-width: 1024px) {
+    .cookie-great-cookies {
+      padding: 40px;
+    }
+    .cookie-great-cookies-list {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    .cookie-great-cookies-title {
+      font-size: 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .cookie-great-cookies {
+      padding: 30px 20px;
+    }
+    .cookie-great-cookies-list {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+    .cookie-great-cookies-title {
+      font-size: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cookie-great-cookies {
+      padding: 20px 15px;
+    }
+    .cookie-great-cookies-list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .cookie-great-cookies-title {
+      font-size: 24px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cookie Grid",
+  "tag": "section",
+  "class": "cookie-grid-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Great Cookies, ANY OCCASION",
+      "info": "Main heading for the cookie grid section"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "info": "Optional subtitle text below the main heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cookie_image",
+      "name": "Cookie Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "cookie_image",
+          "label": "Cookie Image",
+          "info": "Upload a cookie image (recommended: 200x200px, square format)"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt Text",
+          "info": "Describe the cookie image for accessibility"
+        },
+        {
+          "type": "url",
+          "id": "cookie_link",
+          "label": "Cookie Link",
+          "info": "Optional: Link to product page or more details"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cookie Grid",
+      "blocks": [
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        },
+        {
+          "type": "cookie_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

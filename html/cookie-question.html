@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Questions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen:wght@400&display=swap" rel="stylesheet">
+    <style>
+        .font-koulen {
+            font-family: 'Koulen', cursive;
+        }
+
+        .cookie-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding-top: 60px;
+            padding-bottom: 120px;
+        }
+
+        .cookie-questions-container {
+            width: 100%;
+            max-width: 1440px;
+            padding: 0 40px;
+            display: flex;
+            justify-content: start;
+            gap: 40px;
+        }
+
+        .cookie-questions-content {
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            width: min-content;
+        }
+
+        .cookie-questions-text-block {
+            text-align: left;
+        }
+
+        .title-wrapper {
+            display: inline-block;
+            width: auto;
+        }
+
+        .cookie-questions-title-group {
+            font-size: 64px;
+            line-height: 1.1;
+            color: black;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .cookie-questions-title-span {
+            color: #D53E6C;
+        }
+
+        .cookie-questions-description {
+            font-size: 16px;
+            margin-top: 12px;
+            text-align: left;
+        }
+
+        .cookie-questions-image {
+            width: 50%;
+            aspect-ratio: 1/1;
+        }
+
+        .cookie-questions-image-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            height: auto;
+            object-fit: contain;
+            border-radius: 40px;
+            border: 2px solid #D53E6C;
+        }
+
+        .cookie-questions-list {
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cookie-questions-item {
+            border-top: 2px solid black;
+            padding: 20px 10px 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cookie-questions-item-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 20px;
+            cursor: pointer;
+        }
+
+        .cookie-questions-item-title-icon {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .cookie-questions-item-answer {
+            font-weight: 400;
+            font-size: 16px;
+            display: none;
+        }
+
+        .cookie-questions-item-answer.show {
+            display: block;
+        }
+
+        .cookie-great-cookies {
+            width: 100%;
+            max-width: 1440px;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .cookie-great-cookies-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 36px;
+            color: #D53E6C;
+        }
+
+        .cookie-great-cookies-list {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+
+        .cookie-img-container {
+            width: 100%;
+        }
+
+        .cookie-great-cookies-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .cookie-great-divider {
+            width: calc(100% - 40px);
+            border: 2px dashed #D53E6C;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        .shop-cookies {
+            width: 100%;
+            max-width: 1440px;
+            padding: 0 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .shop-cookies-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shop-cookies-title {
+            font-size: 36px;
+            color: black;
+            text-align: center;
+        }
+
+        .shop-cookies-list {
+            width: 100%;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .shop-cookies-list::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .shop-cookies-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .shop-cookies-list::-webkit-scrollbar-thumb {
+            background: #D53E6C;
+            border-radius: 4px;
+        }
+
+        .shop-cookies-item {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 320px;
+        }
+
+        .shop-cookies-item-image {
+            width: 320px;
+            height: 400px;
+            background: #FDF5E7;
+            border-radius: 16px;
+            padding: 62px 60px 60px 62px;
+        }
+
+        .shop-cookies-item-image-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .shop-cookies-item-description {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .shop-cookies-item-description h3 {
+            font-size: 24px;
+            color: #D53E6C;
+        }
+
+        .shop-cookies-item-description p {
+            font-size: 16px;
+            color: black;
+        }
+
+        @media (max-width: 1240px) {
+            .cookie-questions-content {
+                padding-top: 10px;
+            }
+            .cookie-questions-item {
+                border-top: 2px solid black;
+                padding: 15px 10px 15px 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .cookie-questions {
+                padding-top: 0px;
+                gap: 0px;
+            }
+            .cookie-questions-image {
+                display: none;
+            }
+
+            .cookie-questions-content {
+                width: 100%;
+                padding: 15px 20px 15px 20px;
+            }
+
+            .cookie-great-cookies {
+                padding: 0px 40px;
+            }
+
+            .shop-cookies-list {
+                overflow-x: auto;
+                justify-content: start;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                scroll-behavior: smooth;
+            }
+
+            .shop-cookies {
+                padding: 0px 40px;
+            }
+
+            .shop-cookies-container {
+                gap: 40px;
+                align-items: start;
+            }
+
+            .shop-cookies-title {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .cookie-questions {
+                padding-bottom: 60px;
+                gap: 10px
+            }
+
+            .cookie-questions-title-group {
+                font-size: 40px;
+            }
+            .cookie-questions-container {
+                padding: 0 20px;
+                flex-direction: column;
+            }
+
+            .cookie-questions-image {
+                width: 100%;
+                order: 3;
+                display: block;
+            }
+
+            .cookie-questions-content {
+                width: 100%;
+                order: 2;
+            }
+
+            .cookie-great-cookies-title {
+                flex-direction: column;
+                line-height: 1.2;
+            }
+
+            .cookie-great-cookies-list {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .cookie-questions-content {
+                width: 100%;
+                padding: 15px 0px 15px 0px;
+            }
+
+            .cookie-great-cookies {
+                padding: 0px 20px;
+            }
+
+            .shop-cookies-list {
+                overflow-x: auto;
+                justify-content: start;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                scroll-behavior: smooth;
+            }
+
+            .shop-cookies {
+                padding: 0px 20px;
+            }
+
+            .shop-cookies-container {
+                gap: 20px;
+                align-items: start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cookie-questions-title-group {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="cookie-questions">
+        <hr class="cookie-great-divider">
+        <div class="cookie-questions-container">
+            <div class="cookie-questions-image">
+                <img
+                    src="/placeholder.svg?height=500&width=500"
+                    alt="cookie-questions-image"
+                    class="cookie-questions-image-img"
+                />
+            </div>
+            <div class="cookie-questions-content">
+                <h2 class="font-koulen cookie-questions-title-group">
+                    Cookie Questions?
+                    <br />
+                    <span class="cookie-questions-title-span">
+                        We have answers.
+                    </span>
+                </h2>
+                <div class="cookie-questions-list" id="cookieQuestionsList">
+                    <!-- Questions will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        <div class="cookie-great-cookies">
+            <h2 class="font-koulen cookie-great-cookies-title">
+                <span>Great Cookies, </span>
+                <span>ANY OCCASION</span>
+            </h2>
+            <div class="cookie-great-cookies-list" id="cookieImagesList">
+                <!-- Cookie images will be populated by JavaScript -->
+            </div>
+        </div>
+        <hr class="cookie-great-divider">
+        <div class="shop-cookies">
+            <div class="shop-cookies-container">
+                <h2 class="font-koulen shop-cookies-title">
+                    SHOP COOKIES
+                </h2>
+                <div class="shop-cookies-list" id="shopCookiesList">
+                    <!-- Shop cookies will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sample data (replace with your actual data)
+        const cookieQuestions = [
+            {
+                question: "What ingredients do you use in your cookies?",
+                answer: "We use only the finest ingredients including organic flour, real butter, farm-fresh eggs, and premium chocolate chips. All our cookies are made with natural ingredients and no artificial preservatives."
+            },
+            {
+                question: "Do you offer gluten-free options?",
+                answer: "Yes! We have a variety of gluten-free cookies made with almond flour and other gluten-free alternatives. They're just as delicious as our traditional cookies."
+            },
+            {
+                question: "How long do the cookies stay fresh?",
+                answer: "Our cookies stay fresh for up to 7 days when stored in an airtight container at room temperature. For longer storage, you can freeze them for up to 3 months."
+            },
+            {
+                question: "Can I customize cookies for special events?",
+                answer: "We offer custom cookie decorating for birthdays, weddings, corporate events, and other special occasions. Contact us at least 48 hours in advance for custom orders."
+            },
+            {
+                question: "Do you ship nationwide?",
+                answer: "Yes, we ship our cookies nationwide! We use special packaging to ensure your cookies arrive fresh and intact. Shipping typically takes 2-3 business days."
+            }
+        ];
+
+        const shopCookies = [
+            {
+                name: "Chocolate Chip Classic",
+                description: "Our signature chocolate chip cookies made with premium Belgian chocolate chips and a hint of vanilla.",
+                image: "/placeholder.svg?height=200&width=200"
+            },
+            {
+                name: "Double Fudge Brownie",
+                description: "Rich, fudgy brownie cookies with chunks of dark chocolate and a soft, chewy center.",
+                image: "/placeholder.svg?height=200&width=200"
+            },
+            {
+                name: "Oatmeal Raisin Delight",
+                description: "Traditional oatmeal cookies packed with plump raisins and a touch of cinnamon spice.",
+                image: "/placeholder.svg?height=200&width=200"
+            },
+            {
+                name: "Sugar Cookie Supreme",
+                description: "Classic sugar cookies with a perfect balance of sweetness and a soft, tender texture.",
+                image: "/placeholder.svg?height=200&width=200"
+            }
+        ];
+
+        // State management
+        let openIndex = null;
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCookieQuestions();
+            renderCookieImages();
+            renderShopCookies();
+        });
+
+        function handleQuestionClick(index) {
+            openIndex = openIndex === index ? null : index;
+            updateQuestionDisplay();
+        }
+
+        function renderCookieQuestions() {
+            const container = document.getElementById('cookieQuestionsList');
+            container.innerHTML = '';
+
+            cookieQuestions.forEach((question, index) => {
+                const questionItem = document.createElement('div');
+                questionItem.className = 'cookie-questions-item';
+                
+                questionItem.innerHTML = `
+                    <div class="cookie-questions-item-title" onclick="handleQuestionClick(${index})">
+                        <h3>${question.question}</h3>
+                        <span class="cookie-questions-item-title-icon" id="icon-${index}">+</span>
+                    </div>
+                    <p class="cookie-questions-item-answer" id="answer-${index}">
+                        ${question.answer}
+                    </p>
+                `;
+                
+                container.appendChild(questionItem);
+            });
+        }
+
+        function updateQuestionDisplay() {
+            cookieQuestions.forEach((_, index) => {
+                const answer = document.getElementById(`answer-${index}`);
+                const icon = document.getElementById(`icon-${index}`);
+                
+                if (openIndex === index) {
+                    answer.classList.add('show');
+                    icon.textContent = '−';
+                } else {
+                    answer.classList.remove('show');
+                    icon.textContent = '+';
+                }
+            });
+        }
+
+        function renderCookieImages() {
+            const container = document.getElementById('cookieImagesList');
+            container.innerHTML = '';
+
+            for (let i = 0; i < 12; i++) {
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'cookie-img-container';
+                
+                const img = document.createElement('img');
+                img.src = '/placeholder.svg?height=100&width=100';
+                img.alt = `cookie-${i}`;
+                img.className = 'cookie-great-cookies-img';
+                
+                imageContainer.appendChild(img);
+                container.appendChild(imageContainer);
+            }
+        }
+
+        function renderShopCookies() {
+            const container = document.getElementById('shopCookiesList');
+            container.innerHTML = '';
+
+            shopCookies.forEach((cookie, index) => {
+                const cookieItem = document.createElement('div');
+                cookieItem.className = 'shop-cookies-item';
+                
+                cookieItem.innerHTML = `
+                    <div class="shop-cookies-item-image">
+                        <img
+                            src="${cookie.image}"
+                            alt="${cookie.name}"
+                            class="shop-cookies-item-image-img"
+                        />
+                    </div>
+                    <div class="shop-cookies-item-description">
+                        <h3 class="font-koulen">${cookie.name}</h3>
+                        <p>${cookie.description}</p>
+                    </div>
+                `;
+                
+                container.appendChild(cookieItem);
+            });
+        }
+    </script>
+</body>
+</html>

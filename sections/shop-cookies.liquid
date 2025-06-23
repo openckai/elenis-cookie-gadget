@@ -1,0 +1,238 @@
+{{ 'https://fonts.googleapis.com/css2?family=Koulen:wght@400&display=swap' | stylesheet_tag }}
+
+{% style %}
+  .elenis-shop-cookies {
+    width: 100%;
+    max-width: 1440px;
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .elenis-shop-cookies-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .elenis-shop-cookies-title {
+    font-size: 36px;
+    color: {{ section.settings.title_color }};
+    text-align: center;
+    font-family: 'Koulen', cursive;
+  }
+
+  .elenis-shop-cookies-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    justify-content: center;
+  }
+
+  .elenis-shop-cookies-item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .elenis-shop-cookies-item-image {
+    width: 100%;
+    height: 400px;
+    background: {{ section.settings.card_background_color }};
+    border-radius: 16px;
+    padding: 62px 60px 60px 62px;
+  }
+
+  .elenis-shop-cookies-item-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .elenis-shop-cookies-item-description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .elenis-shop-cookies-item-description h3 {
+    font-size: 24px;
+    color: {{ section.settings.accent_color }};
+    font-family: 'Koulen', cursive;
+  }
+
+  .elenis-shop-cookies-item-description p {
+    font-size: 16px;
+    color: {{ section.settings.text_color }};
+  }
+
+  @media (max-width: 1024px) {
+    .elenis-shop-cookies {
+      padding: 0 40px;
+    }
+
+    .elenis-shop-cookies-container {
+      gap: 40px;
+      align-items: start;
+    }
+
+    .elenis-shop-cookies-title {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .elenis-shop-cookies {
+      padding: 0 20px;
+    }
+
+    .elenis-shop-cookies-container {
+      gap: 20px;
+    }
+
+    .elenis-shop-cookies-list {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .elenis-shop-cookies-item {
+      max-width: 100%;
+    }
+
+    .elenis-shop-cookies-item-image {
+      height: 300px;
+      padding: 40px;
+    }
+  }
+{% endstyle %}
+
+<div class="elenis-shop-cookies">
+  <div class="elenis-shop-cookies-container">
+    <h2 class="elenis-shop-cookies-title">
+      {{ section.settings.title | escape }}
+    </h2>
+    <div class="elenis-shop-cookies-list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'cookie_item' -%}
+          <div class="elenis-shop-cookies-item" {{ block.shopify_attributes }}>
+            <div class="elenis-shop-cookies-item-image">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | img_url: 'master' }}"
+                  alt="{{ block.settings.title | escape }}"
+                  class="elenis-shop-cookies-item-image-img"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </div>
+            <div class="elenis-shop-cookies-item-description">
+              <h3>{{ block.settings.title | escape }}</h3>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop Cookies",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "SHOP COOKIES"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#D53E6C"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#FDF5E7"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cookie_item",
+      "name": "Cookie Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Cookie Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Cookie Name",
+          "default": "Chocolate Chip Classic"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Cookie Description",
+          "default": "Our signature chocolate chip cookies made with premium Belgian chocolate chips and a hint of vanilla."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop Cookies",
+      "settings": {
+        "title": "SHOP COOKIES"
+      },
+      "blocks": [
+        {
+          "type": "cookie_item"
+        },
+        {
+          "type": "cookie_item",
+          "settings": {
+            "title": "Double Fudge Brownie",
+            "description": "Rich, fudgy brownie cookies with chunks of dark chocolate and a soft, chewy center."
+          }
+        },
+        {
+          "type": "cookie_item",
+          "settings": {
+            "title": "Oatmeal Raisin Delight",
+            "description": "Traditional oatmeal cookies packed with plump raisins and a touch of cinnamon spice."
+          }
+        }
+      ]
+    }
+  ]
+}{% endschema %} 
